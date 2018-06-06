@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    my calculator
+  </title>
+
+  <style type="text/css">
+    svg {
+      box-shadow: inset 640px 0px 0px rgba(0, 0, 0, 0.4);
+    }
+
+    svg g path.line {
+      stroke: violet;
+      stroke-width: 2px;
+      stroke-opacity: 1;
+      fill: none;
+    }
+
+    .calculator {
+      /*계산기전체 */
+      background-image: url('wood-texture.jpg');
+      /* background-image: url('a/wood-texture.jpg'); */
+      width: 890px;
+      height: 500px;
+      border: 7px solid #C47F4F;
+      background-color: white;
+      cursor: pointer;
+    }
+
+    .funct {
+      /*기능버튼모음*/
+      width: 888px;
+      height: 157px;
+      margin-bottom: 7px;
+    }
+
+    .funct1 {
+      /*삼각함수 버튼모음*/
+      float: left;
+      margin-bottom: 7px;
+      width: 270px;
+      height: 48px;
+    }
+
+    .funct2 {
+      /*지수로그 버튼모음*/
+      float: left;
+      margin-left: 15px;
+      margin-bottom: 7px;
+      width: 450px;
+      height: 48px;
+    }
+
+    .funct3 {
+      /*함수,변수 버튼모음*/
+      float: right;
+      margin-right: 7px;
+      width: 444px;
+      height: 48px;
+    }
+
+    .funct4 {
+      /*행렬,벡터 버튼모음*/
+      float: left;
+      margin-bottom: 7px;
+      width: 736px;
+      height: 48px;
+    }
+
+    .funct5 {
+      /*비교버튼모음*/
+      float: right;
+      width: 140px;
+      height: 154px;
+    }
+
+    .number {
+      /*숫자버튼모음*/
+      width: 253px;
+      height: 215px;
+      float: right;
+      margin-top: 7px;
+    }
+
+    .result {
+      /*결과창*/
+      width: 250px;
+      height: 106px;
+      float: right;
+      background-color: black;
+      padding-left: 3px;
+      color: green;
+      font: bold 20px sans-serif;
+      margin-top: 8px;
+    }
+
+    .box {
+      width: 260px;
+      height: 56px;
+      float: left;
+    }
+
+    .label {
+      width: 45px;
+      height: 24px;
+      text-align: center;
+      border: 2.5px solid black;
+      margin-left: -2.5px;
+      margin-bottom: -2.5px;
+      color: black;
+      font: semibold 18px sans-serif;
+      float: left;
+    }
+
+    .xstart {
+      width: 40px;
+      height: 24px;
+      text-align: center;
+      margin-left: -2.5px;
+      margin-bottom: -2.5px;
+      border: 2.5px solid black;
+      color: black;
+      font: 18px sans-serif;
+      float: left;
+    }
+
+    .xfinish {
+      width: 40px;
+      height: 24px;
+      text-align: center;
+      border: 2.5px solid black;
+      margin-left: -2.5px;
+      margin-bottom: -2.5px;
+      color: black;
+      font: 18px sans-serif;
+      float: left;
+    }
+
+    .ystart {
+      width: 40px;
+      height: 24px;
+      text-align: center;
+      border: 2.5px solid black;
+      margin-left: -2.5px;
+      color: black;
+      font: 18px sans-serif;
+      float: left;
+    }
+
+    .yfinish {
+      width: 40px;
+      height: 24px;
+      text-align: center;
+      border: 2.5px solid black;
+      margin-left: -2.5px;
+      color: black;
+      font: 18px sans-serif;
+      float: left;
+    }
+
+    .xsplit {
+      width: 40px;
+      height: 24px;
+      text-align: center;
+      border: 2.5px solid black;
+      margin-left: -2.5px;
+      margin-bottom: -2.5px;
+      color: black;
+      font: 18px sans-serif;
+      float: left;
+    }
+
+    .ysplit {
+      width: 40px;
+      height: 24px;
+      text-align: center;
+      border: 2.5px solid black;
+      margin-left: -2.5px;
+      color: black;
+      font: 18px sans-serif;
+      float: left;
+    }
+
+    .draw {
+      width: 50px;
+      height: 30px;
+      text-align: center;
+      border: 2.5px solid black;
+      margin-top: 10px;
+      margin-left: 15px;
+      color: black;
+      font: bold 20px sans-serif;
+      float: left;
+      box-shadow: inset 0 6px 6px rgba(255, 255, 255, 0.3),
+      inset 0 -6px 6px rgba(0, 0, 0, 0.3),
+      0 0px 0px rgba(255, 255, 255, 0.9),
+      inset 6px 0 6px rgba(255, 255, 255, 0.3),
+      inset -6px 0 6px rgba(0, 0, 0, 0.3),
+      0px 0 0px rgba(255, 255, 255, 0.9);
+    }
+
+    .display {
+      /*코드나그래프나*/
+      width: 630px;
+      height: 275px;
+      float: left;
+      /* background-color: black; */
+      margin-top: 5px;
+      color: green;
+    }
+
+    .code {
+      /*코드창*/
+      width: 627px;
+      height: 275px;
+      font: bold 20px sans-serif;
+      position: static;
+      float: left;
+      margin-top: 5px;
+      padding-left: 3px;
+      background-color: black;
+      color: green;
+    }
+
+    .prev {
+      /*이전버튼*/
+      float: left;
+      display: inline-block;
+      width: 101px;
+      height: 42px;
+      border: 2.5px solid black;
+      margin-top: 4px;
+      margin-bottom: 2px;
+      margin-right: 25px;
+      text-align: center;
+      font: bold 21px sans-serif;
+      box-shadow: inset 0 6px 6px rgba(255, 255, 255, 0.3),
+      inset 0 -6px 6px rgba(0, 0, 0, 0.3),
+      0 0px 0px rgba(255, 255, 255, 0.9),
+      inset 6px 0 6px rgba(255, 255, 255, 0.3),
+      inset -6px 0 6px rgba(0, 0, 0, 0.3),
+      0px 0 0px rgba(255, 255, 255, 0.9);
+    }
+
+    .show {
+      /*식or그래프 변경*/
+      float: left;
+      display: inline-block;
+      width: 120px;
+      height: 42px;
+      border: 2.5px solid black;
+      margin-top: 4px;
+      margin-right: 10px;
+      text-align: center;
+      font: bold 21px sans-serif;
+      box-shadow: inset 0 6px 6px rgba(255, 255, 255, 0.3),
+      inset 0 -6px 6px rgba(0, 0, 0, 0.3),
+      0 0px 0px rgba(255, 255, 255, 0.9),
+      inset 6px 0 6px rgba(255, 255, 255, 0.3),
+      inset -6px 0 6px rgba(0, 0, 0, 0.3),
+      0px 0 0px rgba(255, 255, 255, 0.9);
+    }
+
+    .help {
+      /*도움말버튼*/
+      float: left;
+      display: inline-block;
+      width: 42px;
+      height: 42px;
+      border: 2.5px solid black;
+      margin-left: 30px;
+      margin-right: 30px;
+      text-align: center;
+      font: bold 21px sans-serif;
+      box-shadow: inset 0 6px 6px rgba(255, 255, 255, 0.3),
+      inset 0 -6px 6px rgba(0, 0, 0, 0.3),
+      0 0px 0px rgba(255, 255, 255, 0.9),
+      inset 6px 0 6px rgba(255, 255, 255, 0.3),
+      inset -6px 0 6px rgba(0, 0, 0, 0.3),
+      0px 0 0px rgba(255, 255, 255, 0.9);
+      border-radius: 33px; //둥글게
+    }
+
+    .key {
+      /*숫자 키*/
+      display: inline-block;
+      float: left;
+      width: 57px;
+      height: 37px;
+      margin: 0.62px;
+      border: 2.5px solid black;
+      text-align: center;
+      font: bold 20px sans-serif;
+      box-shadow: inset 0 6px 6px rgba(255, 255, 255, 0.3),
+      inset 0 -6px 6px rgba(0, 0, 0, 0.3),
+      0 0px 0px rgba(255, 255, 255, 0.9),
+      inset 6px 0 6px rgba(255, 255, 255, 0.3),
+      inset -6px 0 6px rgba(0, 0, 0, 0.3),
+      0px 0 0px rgba(255, 255, 255, 0.9);
+    }
+
+    .key_f {
+      /*함수 키*/
+      float: left;
+      display: inline-block;
+      width: 83px;
+      height: 42px;
+      margin: 1px;
+      border: 2.5px solid black;
+      text-align: center;
+      font: bold 20px sans-serif;
+      box-shadow: inset 0 6px 6px rgba(255, 255, 255, 0.3),
+      inset 0 -6px 6px rgba(0, 0, 0, 0.3),
+      0 0px 0px rgba(255, 255, 255, 0.9),
+      inset 6px 0 6px rgba(255, 255, 255, 0.3),
+      inset -6px 0 6px rgba(0, 0, 0, 0.3),
+      0px 0 0px rgba(255, 255, 255, 0.9);
+    }
+
+    .ac {
+      /*함수 키*/
+      float: left;
+      display: inline-block;
+      width: 83px;
+      height: 42px;
+      margin: 1px;
+      border: 2.5px solid black;
+      text-align: center;
+      font: bold 20px sans-serif;
+      box-shadow: inset 0 6px 6px rgba(255, 255, 255, 0.3),
+      inset 0 -6px 6px rgba(0, 0, 0, 0.3),
+      0 0px 0px rgba(255, 255, 255, 0.9),
+      inset 6px 0 6px rgba(255, 255, 255, 0.3),
+      inset -6px 0 6px rgba(0, 0, 0, 0.3),
+      0px 0 0px rgba(255, 255, 255, 0.9);
+    }
+
+    .selected {
+      /*선택되었을 때*/
+      box-shadow: inset 0 6px 6px rgba(0, 0, 0, 0.3),
+      inset 0 -6px 6px rgba(255, 255, 255, 0.3),
+      0 0px 0px rgba(255, 255, 255, 0.9),
+      inset 6px 0 6px rgba(0, 0, 0, 0.3),
+      inset -6px 0 6px rgba(255, 255, 255, 0.3),
+      0px 0 0px rgba(255, 255, 255, 0.9);
+      border: 2.5px solid black;
+      font-size: 22px;
+    }
+
+    .sselected {
+      /*선택되었을 때*/
+      box-shadow: inset 0 6px 6px rgba(0, 0, 0, 0.3),
+      inset 0 -6px 6px rgba(255, 255, 255, 0.3),
+      0 0px 0px rgba(255, 255, 255, 0.9),
+      inset 6px 0 6px rgba(0, 0, 0, 0.3),
+      inset -6px 0 6px rgba(255, 255, 255, 0.3),
+      0px 0 0px rgba(255, 255, 255, 0.9);
+      border: 2.5px solid black;
+      font-size: 22px;
+    }
+
+    .disable {
+      /*비활성화*/
+      box-shadow: inset 260px 0px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    .helpmode {
+      /*도움말모드*/
+    }
+
+    .axis {
+      /*축설정가능*/
+      box-shadow: inset 140px 0px 0px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+  <!-- <script src="jquery-3.3.1.js" type="text/javascript"></script> -->
+  <script src = "https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <!-- <script src="a/jquery-3.3.1.js" type="text/javascript"></script> -->
+  <!-- <script src="a/math.js" type="text/javascript"></script> -->
+  <script src="math.js" type="text/javascript"></script>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+</head>
+
+<body>
+  <div class="calculator">
+    <div class="funct">
+      <div class="funct1">
+        <div class="key_f">sin</div>
+        <div class="key_f">cos</div>
+        <div class="key_f">tan</div>
+      </div>
+      <div class="funct2">
+        <div class="key_f">e^x</div>
+        <div class="key_f">x^y</div>
+        <div class="key_f">sqrt</div>
+        <div class="key_f">cbrt</div>
+        <div class="key_f">log</div>
+      </div>
+      <div class="funct5">
+        <div class="key_f" style="width: 63px;">==</div>
+        <div class="key_f" style="width: 63px; margin-bottom:7px;">!=</div>
+        <div class="key_f" style="width: 63px;">＜</div>
+        <div class="key_f" style="width: 63px; margin-bottom:7px;">＞</div>
+        <div class="key_f" style="width: 63px;">≤</div>
+        <div class="key_f" style="width: 63px;">≥</div>
+      </div>
+      <div class="funct4">
+        <div class="key_f">dot</div>
+        <div class="key_f">cross</div>
+        <div class="key_f">trans</div>
+        <div class="key_f" style="margin-right:10px;">det</div>
+        <div class="key_f" style="width: 51px;">,</div>
+        <div class="key_f" style="width: 51px; margin-right:10px;">;</div>
+        <div class="key_f" style="width: 51px;">(</div>
+        <div class="key_f" style="width: 51px; margin-right:10px;">)</div>
+        <div class="key_f" style="width: 51px;">[</div>
+        <div class="key_f" style="width: 51px;">]</div>
+      </div>
+      <div class="funct3">
+        <div class="key_f" style="width: 63px;">x</div>
+        <div class="key_f" style="width: 63px;">y</div>
+        <div class="key_f" style="width: 63px;  margin-right:10px;">z</div>
+        <div class="key_f" style="width: 63px;">f</div>
+        <div class="key_f" style="width: 63px; margin-right:10px;">g</div>
+        <div class="key_f" style="width: 63px;">in</div>
+      </div>
+      <div class="help">?</div>
+      <div class="ac">AC</div>
+      <div class="key_f" style="width:65px; margin-left: 10px;">←</div>
+    </div>
+
+    <div class="show">그래프보기</div>
+    <div class="prev">이전기록</div>
+    <div class="box">
+      <div class="label">x축</div>
+      <div class="xstart"></div>
+      <div class="label" style="width:35px;">~</div>
+      <div class="xfinish"></div>
+      <div class="label">간격</div>
+      <div class="xsplit"></div>
+      <div class="label">y축 </div>
+      <div class="ystart"></div>
+      <div class="label" style="width:35px;">~</div>
+      <div class="yfinish"></div>
+      <div class="label">간격</div>
+      <div class="ysplit"></div>
+    </div>
+    <div class="draw">설정</div>
+
+    <div class="number">
+      <span class="key">pi</span>
+      <span class="key">e</span>
+      <span class="key">i</span>
+      <span class="key">%</span>
+      <span class="key">7</span>
+      <span class="key">8</span>
+      <span class="key">9</span>
+      <span class="key">/</span>
+      <span class="key">4</span>
+      <span class="key">5</span>
+      <span class="key">6</span>
+      <span class="key">*</span>
+      <span class="key">1</span>
+      <span class="key">2</span>
+      <span class="key">3</span>
+      <span class="key">-</span>
+      <span class="key">=</span>
+      <span class="key">0</span>
+      <span class="key">.</span>
+      <span class="key">+</span>
+    </div>
+    <div class="display myChart"></div>
+    <div class="result"></div>
+  </div>
+
+  <script type="text/javascript">
+    $(document).ready(function() { //시작되었다
+      $('.display').addClass("code"); //식 화면을 보여주며 시작
+      d3.select("svg").style("opacity", 0); //안보이게
+      $('.draw, .box').addClass("disable");
+
+      var h = false;
+      $(".help").click(function() {
+        if ($('.show').text() == "식보기")
+          return; //그래프 보일때 도움말모드x
+        if (h == false) { //도움말모드
+          h = true;
+          $(this).addClass("sselected");
+          $('.key').addClass("disable");
+          $('.code').text("도움말모드입니다");
+          $(".key_f, .prev, .show, .ac").addClass("helpmode");
+        } else {
+          h = false;
+          $(this).removeClass("sselected");
+          $('.key').removeClass("disable");
+          $('.code').text("");
+          $(".key_f, .prev, .show, .ac").removeClass("helpmode");
+        }
+      });
+
+      var hf_name = new Array(22);
+      var hf_how = new Array(22);
+      hf_name[0] = "sin";
+      hf_name[1] = "cos";
+      hf_name[2] = "tan";
+      hf_name[3] = "e^x";
+      hf_name[4] = "x^y";
+      hf_name[5] = "sqrt";
+      hf_name[6] = "cbrt";
+      hf_name[7] = "log";
+      hf_name[8] = "dot";
+      hf_name[9] = "cross";
+      hf_name[10] = "det";
+      hf_name[11] = "trans";
+      hf_name[12] = "x";
+      hf_name[13] = "y";
+      hf_name[14] = "z";
+      hf_name[15] = "f";
+      hf_name[16] = "g";
+      hf_name[17] = "in";
+      hf_name[18] = "AC";
+      hf_name[19] = "←";
+      hf_name[20] = "그래프보기";
+      hf_name[21] = "이전기록";
+      hf_how[0] = "sin함수입니다 ex) sin ( 3 )";
+      hf_how[1] = "cos함수입니다 ex) cos ( 3 )";
+      hf_how[2] = "tan함수입니다 ex) tan ( 3 )";
+      hf_how[3] = "e의 제곱입니다 ex) e^x 3 ≫ e^3";
+      hf_how[4] = "x의 y제곱입니다 ex) 3 x^y 5 ≫ 3^5";
+      hf_how[5] = "제곱근입니다 ex) sqrt ( 3 )";
+      hf_how[6] = "세제곱근입니다 ex) cbrt ( 3 )";
+      hf_how[7] = "log함수입니다 ex) log ( 3 )";
+      hf_how[8] = "벡터 내적입니다 ex) dot ( ( 1 , 2 ) , ( 3 , 4 ) )";
+      hf_how[9] = "벡터 외적입니다 ex) cross( [ 1 , 2 ] [ 3 , 4 ] )";
+      hf_how[10] = "행렬의 determinent입니다 ex) det ( [ 1 , 2 ; 3 , 4 ] )";
+      hf_how[11] = "역행렬입니다 ex) trans ( [ [ 1 , 2 ] , [ 3 , 4 ] ] )";
+      hf_how[12] = "변수 x입니다 ex) x in 3 ≫ x=3";
+      hf_how[13] = "변수 y입니다 ex) y in 3 ≫ y=3";
+      hf_how[14] = "변수 z입니다 ex) z in 3 ≫ z=3";
+      hf_how[15] = "함수 f입니다 ex) f ( x ) in x + 3 ≫ f(x)=x+3";
+      hf_how[16] = "함수 g입니다 ex) g ( x ) in x + 3 ≫ g(x)=x+3";
+      hf_how[17] = "대입버튼입니다 변수와 함수의 = 대신 사용할 수 있습니다";
+      hf_how[18] = "초기화합니다";
+      hf_how[19] = "한단계전으로 돌아갑니다";
+      hf_how[20] = "그래프 모드입니다 사용자 정의 함수가 있는 경우 그래프를 보여줍니다";
+      hf_how[21] = "이전기록을 보여줍니다";
+
+      $(".key_f, .prev, .show, .ac").click(function() {
+        if ($(this).hasClass("helpmode") == true) {
+          var i = 0;
+          for (i = 0; i < 22; i++) {
+            if ($(this).text() == hf_name[i])
+              $(".code").text(hf_how[i]);
+          } //도움말 출력하기
+        }
+      });
+
+      var funcf_name = '',
+        funcf_x = 0,
+        funcf_y = 0;
+      var funcg_name = '',
+        funcg_x = 0,
+        funcg_y = 0;
+
+      $(".xstart, .xfinish, .ystart, .yfinish, .xsplit, .ysplit").click(function() {
+        if ($('.show').text() == "그래프보기")
+          return;
+        $(".xstart, .xfinish, .ystart, .yfinish, .xsplit, .ysplit").removeClass("axis");
+        $(this).addClass("axis");
+        displayV = '';
+      });
+      var displayV = '';
+
+      $(".key, .ac").each(function(index, key) { //키들
+        $(this).click(function() {
+          if (displayV == 0)
+            displayV = '';
+          if ($(this).text() == 'AC') {
+            displayV = '0';
+          } else {
+            displayV += $(this).text();
+          }
+          if ($(".xstart").hasClass("axis"))
+            $(".xstart").text(displayV);
+          if ($(".xfinish").hasClass("axis"))
+            $(".xfinish").text(displayV);
+          if ($(".ystart").hasClass("axis"))
+            $(".ystart").text(displayV);
+          if ($(".yfinish").hasClass("axis"))
+            $(".yfinish").text(displayV);
+          if ($(".xsplit").hasClass("axis"))
+            $(".xsplit").text(displayV);
+          if ($(".ysplit").hasClass("axis"))
+            $(".ysplit").text(displayV);
+        });
+      });
+
+      $(".show").click(function() {
+        if (h == true)
+          return; //도움말모드 아닐때
+        if (funcf_name == '' && funcg_name == '') {
+          $('.code').text("사용자 함수가 정의되어있지 않습니다");
+          return;
+        }
+
+        if ($(this).text() == "그래프보기") {
+          $(this).text("식보기");
+          $('.code').text("");
+          $('.result').text("");
+          $('.display').removeClass("code");
+          $('.key_f, .prev, .help').addClass("disable");
+          $('.draw, .box').removeClass("disable");
+
+          var margin = {
+            top: 20,
+            right: 20,
+            bottom: 30,
+            left: 30
+          };
+          var width = 630 - margin.left - margin.right;
+          var height = 275 - margin.top - margin.bottom;
+
+          var svg = d3.select(".myChart").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+          if (funcf_name != '') {
+            var xs = 0,
+              xf = 10;
+            var ys = 0,
+              yf = 10;
+            var xl = 10;
+            var yl = 10;
+
+            var data = d3.range(xf - xs + 1).map(function(funcf_x) {
+              return {
+                x: funcf_x,
+                y: math.parser().eval(funcf_y.replace(/z/gi, funcf_x))
+              };
+            });
+
+            $(".xstart").text(xs);
+            $(".xfinish").text(xf);
+            $(".ystart").text(ys);
+            $(".yfinish").text(yf);
+            $(".xsplit").text(xl);
+            $(".ysplit").text(yl);
+
+            var x = d3.scale.linear().domain([xs, xf]).range([0, width]); //범위!
+            var y = d3.scale.linear().domain([ys, yf]).range([height, 0]); //범위!
+
+            var xAxis = d3.svg.axis().scale(x).orient("bottom").ticks(xl).outerTickSize(1);
+            var yAxis = d3.svg.axis().scale(y).orient("left").ticks(yl).outerTickSize(1);
+
+            svg.append('g')
+              .attr('transform', 'translate(0, ' + height + ')')
+              .style("stroke", "#ccc")
+              .call(xAxis);
+
+            svg.append("g")
+              .style("stroke", "#ccc")
+              .call(yAxis);
+
+            svg.selectAll("line")
+              .style({
+                "stroke": "#ccc",
+                "shape-rendering": "crispEdges"
+              });
+            svg.selectAll("text")
+              .attr("fill", "#ccc")
+              .style("font-size", "18px");
+
+            svg.selectAll("line.y")
+              .data(y.ticks(yl))
+              .enter().append("line")
+              .attr("class", "y")
+              .attr("x1", 0)
+              .attr("x2", width)
+              .attr("y1", y)
+              .attr("y2", y)
+              .style("stroke", "#ccc");
+
+            svg.selectAll("line.x")
+              .data(x.ticks(xl))
+              .enter().append("line")
+              .attr("class", "x")
+              .attr("x1", x)
+              .attr("x2", x)
+              .attr("y1", 0)
+              .attr("y2", height)
+              .style("stroke", "#ccc");
+
+            var line = d3.svg.line()
+              .y(function(d) {
+                return y(d.y);
+              }).x(function(d) {
+                return x(d.x);
+              }).interpolate('monotone');
+
+            svg.append("path")
+              .datum(data)
+              .attr("class", "line")
+              .attr("d", line);
+
+            svg.selectAll("dot")
+              .data(data)
+              .enter()
+              .append("text")
+              .attr('text-anchor', 'middle')
+              .attr("x", function(d) {
+                return x(d.x);
+              })
+              .attr("y", function(d) {
+                return y(d.y);
+              })
+              .attr('dx', '30')
+              .attr('dy', '10')
+              .text(function(d) {
+                if (d.x == 0)
+                  return funcf_name;
+              });
+
+            svg.selectAll("dot")
+              .data(data)
+              .enter()
+              .append("text")
+              .attr('text-anchor', 'middle')
+              .attr("x", function(d) {
+                return x(d.x);
+              })
+              .attr("y", function(d) {
+                return y(d.y);
+              })
+              .attr('dx', '10')
+              .attr('dy', '5')
+              .text(function(d) {
+                if (d.x == 0)
+                  return d.y;
+              }); //y축과 만나는점 표시
+
+            d3.select("svg").style("opacity", 1);
+          }
+          if (funcg_name != '') {
+            var xs = 0,
+              xf = 10;
+            var ys = 0,
+              yf = 10;
+            var xl = 10;
+            var yl = 10;
+
+            var datag = d3.range(xf - xs + 1).map(function(funcg_x) {
+              return {
+                x: funcg_x,
+                y: math.parser().eval(funcg_y.replace(/z/gi, funcg_x))
+              };
+            });
+
+            $(".xstart").text(xs);
+            $(".xfinish").text(xf);
+            $(".ystart").text(ys);
+            $(".yfinish").text(yf);
+            $(".xsplit").text(xl);
+            $(".ysplit").text(yl);
+
+            var x = d3.scale.linear().domain([xs, xf]).range([0, width]); //범위!
+            var y = d3.scale.linear().domain([ys, yf]).range([height, 0]); //범위!
+
+            var xAxis = d3.svg.axis().scale(x).orient("bottom").ticks(xl).outerTickSize(1);
+            var yAxis = d3.svg.axis().scale(y).orient("left").ticks(yl).outerTickSize(1);
+
+            svg.append('g')
+              .attr('transform', 'translate(0, ' + height + ')')
+              .style("stroke", "#ccc")
+              .call(xAxis);
+
+            svg.append("g")
+              .style("stroke", "#ccc")
+              .call(yAxis);
+
+            svg.selectAll("line.y")
+              .data(y.ticks(yl))
+              .enter().append("line")
+              .attr("class", "y")
+              .attr("x1", 0)
+              .attr("x2", width)
+              .attr("y1", y)
+              .attr("y2", y)
+              .style("stroke", "#ccc");
+
+            svg.selectAll("line.x")
+              .data(x.ticks(xl))
+              .enter().append("line")
+              .attr("class", "x")
+              .attr("x1", x)
+              .attr("x2", x)
+              .attr("y1", 0)
+              .attr("y2", height)
+              .style("stroke", "#ccc");
+
+            svg.selectAll("line")
+              .style({
+                "stroke": "#ccc",
+                "shape-rendering": "crispEdges"
+              });
+            svg.selectAll("text")
+              .attr("fill", "#ccc")
+              .style("font-size", "18px");
+
+            var line = d3.svg.line().y(function(d) {
+              return y(d.y);
+            }).x(function(d) {
+              return x(d.x);
+            }).interpolate('monotone');
+
+            svg.append("path")
+              .datum(datag)
+              .attr("class", "line")
+              .attr("d", line)
+              .style("stroke", "yellow");
+
+            svg.selectAll("dot")
+              .data(datag)
+              .enter()
+              .append("text")
+              .attr('text-anchor', 'middle')
+              .attr("x", function(d) {
+                return x(d.x);
+              })
+              .attr("y", function(d) {
+                return y(d.y);
+              })
+              .attr('dx', '30')
+              .attr('dy', '10')
+              .text(function(d) {
+                if (d.x == 0)
+                  return funcg_name;
+              });
+
+            svg.selectAll("dot")
+              .data(datag)
+              .enter()
+              .append("text")
+              .attr('text-anchor', 'middle')
+              .attr("x", function(d) {
+                return x(d.x);
+              })
+              .attr("y", function(d) {
+                return y(d.y);
+              })
+              .attr('dx', '10')
+              .attr('dy', '5')
+              .text(function(d) {
+                if (d.x == 0)
+                  return d.y;
+              }); //y축과 만나는점 표시
+
+            d3.select("svg").style("opacity", 1);
+          }
+
+        } else {
+          $(this).text("그래프보기");
+          $('.result').text("");
+          $('.display').addClass("code");
+          $('.key, .ac').removeClass("axis");
+          $('.key_f, .key, .help, .prev').removeClass("disable");
+          $('.draw, .box').addClass("disable");
+          $(".xstart, .xfinish, .ystart, .yfinish, .xsplit, .ysplit").removeClass("axis")
+          $(".xstart, .xfinish, .ystart, .yfinish, .xsplit, .ysplit").text("");
+          d3.select("svg").style("opacity", 0);
+        }
+      });
+
+      $(".draw").click(function() { //축 재설정
+        if ($(this).hasClass("disable") != true) {
+          $(".xstart, .xfinish, .ystart, .yfinish, .xsplit, .ysplit").removeClass("axis")
+
+          xs = $(".xstart").text();
+          xf = $(".xfinish").text();
+          ys = $(".ystart").text();
+          yf = $(".yfinish").text();
+          xl = $(".xsplit").text();
+          yl = $(".ysplit").text();
+
+          d3.select("svg").remove(); //지우고 다시생성
+
+          var margin = {
+            top: 20,
+            right: 20,
+            bottom: 30,
+            left: 30
+          };
+          var width = 630 - margin.left - margin.right;
+          var height = 275 - margin.top - margin.bottom;
+
+          var svg = d3.select(".myChart").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+          if (funcf_name != '') {
+            var data = d3.range(xf - xs + 1).map(function(funcf_x) {
+              return {
+                x: funcf_x,
+                y: math.parser().eval(funcf_y.replace(/z/gi, funcf_x))
+              };
+            });
+          }
+
+          if (funcg_name != '') {
+            var datag = d3.range(xf - xs + 1).map(function(funcg_x) {
+              return {
+                x: funcg_x,
+                y: math.parser().eval(funcg_y.replace(/z/gi, funcg_x))
+              };
+            });
+          }
+
+          x = d3.scale.linear().domain([xs, xf]).range([0, width]); //축그리는범위!
+          y = d3.scale.linear().domain([ys, yf]).range([height, 0]); //범위!
+
+          xAxis = d3.svg.axis().scale(x).orient("bottom").ticks(xl).outerTickSize(1);
+          yAxis = d3.svg.axis().scale(y).orient("left").ticks(yl).outerTickSize(1);
+
+          svg.append('g')
+            .attr('transform', 'translate(0, ' + height + ')')
+            .call(xAxis);
+
+          svg.append("g")
+            .call(yAxis);
+
+          svg.selectAll("line")
+            .style({
+              "stroke": "#ccc",
+              "shape-rendering": "crispEdges"
+            });
+          svg.selectAll("text")
+            .attr("fill", "#ccc")
+            .style("font-size", "18px");
+
+          line = d3.svg.line().y(function(d) {
+            return y(d.y);
+          }).x(function(d) {
+            return x(d.x);
+          }).interpolate('monotone');
+
+          svg.selectAll("line.y")
+            .data(y.ticks(yl))
+            .enter().append("line")
+            .attr("class", "y")
+            .attr("x1", 0)
+            .attr("x2", width)
+            .attr("y1", y)
+            .attr("y2", y)
+            .style("stroke", "#ccc");
+
+          svg.selectAll("line.x")
+            .data(x.ticks(xl))
+            .enter().append("line")
+            .attr("class", "x")
+            .attr("x1", x)
+            .attr("x2", x)
+            .attr("y1", 0)
+            .attr("y2", height)
+            .style("stroke", "#ccc");
+
+          if (funcf_name != '') {
+            svg.append("path")
+              .datum(data)
+              .attr("class", "line")
+              .attr("d", line);
+
+            svg.selectAll("dot")
+              .data(data)
+              .enter()
+              .append("text")
+              .attr('text-anchor', 'middle')
+              .attr("x", function(d) {
+                return x(d.x);
+              })
+              .attr("y", function(d) {
+                return y(d.y);
+              })
+              .attr('dx', '10')
+              .attr('dy', '5')
+              .text(function(d) {
+                if (d.x == 0)
+                  return d.y;
+              }); //y축과 만나는점 표시
+
+            svg.selectAll("dot")
+              .data(data)
+              .enter()
+              .append("text")
+              .attr('text-anchor', 'middle')
+              .attr("x", function(d) {
+                return x(d.x);
+              })
+              .attr("y", function(d) {
+                return y(d.y);
+              })
+              .attr('dx', '30')
+              .attr('dy', '10')
+              .text(function(d) {
+                if (d.x == 0)
+                  return funcf_name;
+              });
+          } //f다시그리기
+
+          if (funcg_name != '') {
+            svg.append("path")
+              .datum(datag)
+              .attr("class", "line")
+              .attr("d", line)
+              .style("stroke", "yellow");
+
+            svg.selectAll("dot")
+              .data(datag)
+              .enter()
+              .append("text")
+              .attr('text-anchor', 'middle')
+              .attr("x", function(d) {
+                return x(d.x);
+              })
+              .attr("y", function(d) {
+                return y(d.y);
+              })
+              .attr('dx', '10')
+              .attr('dy', '5')
+              .text(function(d) {
+                if (d.x == 0)
+                  return d.y;
+              }); //y축과 만나는점 표시
+
+            svg.selectAll("dot")
+              .data(datag)
+              .enter()
+              .append("text")
+              .attr('text-anchor', 'middle')
+              .attr("x", function(d) {
+                return x(d.x);
+              })
+              .attr("y", function(d) {
+                return y(d.y);
+              })
+              .attr('dx', '30')
+              .attr('dy', '10')
+              .text(function(d) {
+                if (d.x == 0)
+                  return funcg_name;
+              });
+          } //g 다시그리기
+          d3.select("svg").style("opacity", 1);
+        }
+      });
+
+      $('.key_f, .prev, .key, .show, .ac, .draw, .help').hover(function() {
+        if ($(this).hasClass("disable") == false)
+          $(this).addClass('selected');
+      }, function() {
+        $(this).removeClass('selected');
+      }); //키위에 마우스 올라가면 이벤트
+
+      var parser = math.parser();
+      var displayValue = '0';
+      var d_array = new Array(); //누른것들 저장
+      var list = new Array(); //이전기록 저장
+      d_array[0] = 0;
+      list[0] = 0;
+
+      var funcf_on;
+      var funcf_array = 0;
+      var funcg_on;
+      var funcg_array = 0;
+
+      var l = 0; //기록 저장한 개수
+      var ll = 0;
+      var n = 0; //버튼누른 개수
+      $('.result').text(displayValue); //일단 처음값 출력
+
+      $('.key, .prev, .key_f, .ac').each(function(index, key) { //키들
+        $(this).click(function(e) {
+          if (displayValue == '0') displayValue = '';
+          $('.result').text(""); //다음 계산하면 전 결과 사라짐
+          if ($(this).hasClass("disable") == true || $(this).hasClass("helpmode") || $(".xstart, .xfinish, .ystart, .yfinish, .xsplit, .ysplit").hasClass("axis")) { //키들 disable이면
+            displayValue = '';
+          } else { //아닌경우에만 계산
+            if ($(this).text() == '=') //계산버튼 누르면
+            {
+              n = 0; //다시0됨
+              l++; //저장
+              ll = l - 1;
+              list[l] = displayValue;
+              list[l] += ' = ';
+              if (funcf_on == true) {
+                funcf_array = displayValue; //계산식 저장
+                var str = funcf_array.split('=');
+                funcf_name = str[0]; //이름이되고
+                var str1 = funcf_name.split('(');
+                var str2 = str1[1].split(')');
+                funcf_x = str2[0]; //변수가 되고
+                funcf_y = str[1].replace(new RegExp(funcf_x, "gi"), 'z');
+                funcf_on = false; //끈다
+              }
+              if (funcg_on == true) {
+                funcg_array = displayValue; //계산식 저장
+                var str = funcg_array.split('=');
+                funcg_name = str[0]; //이름이되고
+                var str1 = funcg_name.split('(');
+                var str2 = str1[1].split(')');
+                funcg_x = str2[0]; //변수가 되고
+                funcg_y = str[1].replace(new RegExp(funcg_x, "gi"), 'z');
+                funcg_on = false; //끈다
+              }
+              try {
+                displayValue = parser.eval(displayValue).toString();
+                var tokens = displayValue.split(' ');
+                if (tokens[0] == 'function') {
+                  displayValue = tokens[0];
+                }
+                list[l] += displayValue;
+                $('.result').text(displayValue);
+                displayValue = '0';
+              } catch (e) { //오류났을때
+                displayValue = '0';
+                if (displayValue != 'function') {
+                  $('.result').text(e);
+                }
+              }
+            } else {
+              switch ($(this).text()) {
+                case '이전기록':
+                  if (ll == 0) {
+                    $('.code').text('이전기록이 없습니다');
+                  } else {
+                    $('.code').text("list[" + ll + "] : " + list[ll]);
+                    ll--;
+                  }
+                  break;
+                case 'AC':
+                  n = 0;
+                  ll = l;
+                  displayValue = '0';
+                  $('.result').text(displayValue); //다시 0으로
+                  $('.code').text(""); //식 지움
+                  break;
+                case '←':
+                  displayValue = ''; //일단 얘 초기화
+                  for (var i = 1; i < n; i++) {
+                    displayValue += d_array[i]; //<-누르기전에 누른거까지만
+                  }
+                  $('.code').text(displayValue);
+                  n--; //줄여줘야 이어지지
+                  break;
+                case 'in':
+                  n++; //누른개수
+                  d_array[n] = '='; //이거로 저장
+                  displayValue += d_array[n]; //이어붙인다
+                  $('.code').text(displayValue); //식 입력
+                  break;
+                case '＜':
+                  n++; //누른개수
+                  d_array[n] = '<'; //이거로 저장
+                  displayValue += d_array[n]; //이어붙인다
+                  $('.code').text(displayValue); //식 입력
+                  break;
+                case '＞':
+                  n++; //누른개수
+                  d_array[n] = '>'; //이거로 저장
+                  displayValue += d_array[n]; //이어붙인다
+                  $('.code').text(displayValue); //식 입력
+                  break;
+                case '≤':
+                  n++; //누른개수
+                  d_array[n] = '<='; //이거로 저장
+                  displayValue += d_array[n]; //이어붙인다
+                  $('.code').text(displayValue); //식 입력
+                  break;
+                case '≥':
+                  n++; //누른개수
+                  d_array[n] = '>='; //이거로 저장
+                  displayValue += d_array[n]; //이어붙인다
+                  $('.code').text(displayValue); //식 입력
+                  break;
+                case 'e^x':
+                  n++; //누른개수
+                  d_array[n] = 'e^'; //이거로 저장
+                  displayValue += d_array[n]; //이어붙인다
+                  $('.code').text(displayValue); //식 입력
+                  break;
+                case 'x^y':
+                  n++; //누른개수
+                  d_array[n] = '^'; //이거로 저장
+                  displayValue += d_array[n]; //이어붙인다
+                  $('.code').text(displayValue); //식 입력
+                  break;
+                case 'trans':
+                  n++; //누른개수
+                  d_array[n] = 'transpose'; //이거로 저장
+                  displayValue += d_array[n]; //이어붙인다
+                  $('.code').text(displayValue); //식 입력
+                  break;
+                case 'g':
+                  n++; //누른개수
+                  funcg_on = true; //켠다
+                  d_array[n] = $(this).text(); //방금누른게 배열d에 저장
+                  displayValue += d_array[n]; //이어붙인다
+                  $('.code').text(displayValue); //식 입력
+                  break;
+                case 'f':
+                  n++; //누른개수
+                  funcf_on = true; //켠다
+                  d_array[n] = $(this).text(); //방금누른게 배열d에 저장
+                  displayValue += d_array[n]; //이어붙인다
+                  $('.code').text(displayValue); //식 입력
+                  break;
+                default:
+                  n++; //누른개수
+                  d_array[n] = $(this).text(); //방금누른게 배열d에 저장
+                  displayValue += d_array[n]; //이어붙인다
+                  $('.code').text(displayValue); //식 입력
+                  break;
+              }
+            }
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+
+</html>
